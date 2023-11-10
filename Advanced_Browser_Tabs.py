@@ -33,15 +33,17 @@ def main():
         print(openTab(dictionary_list_Tab, title, url))
 
     elif user_input == 2:
-        variable = 1
+        variable = 1    # variable here is to determine if the input is empty or not
         index = input("enter index to delete the page : ")
         print(dictionary_list_Tab)
         if index == "":
             variable = 0
             print(closeTab(index, variable))
+            # first I took the input as a normal input from the user just to check if it's empty
         else:
             try:
-                index = int(index)
+                index = int(index)  # int() transforms the type of the object to integer in opposite to str()(informations from university)
+                # the input is now of integer type to search the indexes
                 if index > len(dictionary_list_Tab):
                     print("This Tab is not found")
                 else:
@@ -51,6 +53,7 @@ def main():
                             break
             except ValueError:
                 print("Invalid input. Please enter a valid tab index")
+            # this part might seem a little creepy, but I tried not to use Google or other sources of information
 
 
 def openTab(dic_list, title, url):
