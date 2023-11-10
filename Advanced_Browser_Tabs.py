@@ -1,5 +1,9 @@
 dictionary_list_Tab = []  # this list is to maintain each tab in a dictionary
 
+order_count = []  # this list for indexes in case of closing tabs
+
+
+
 
 def main():
     print()
@@ -34,7 +38,20 @@ def main():
         print(openTab(dictionary_list_Tab, title, url))
 
     elif user_input == 2:
-        index = int(input("Enter index of the page you want to close : "))
+        for i in range(len(dictionary_list_Tab)):  # this loop is for checking if tab index exist or not to append it
+            if i in order_count:
+                continue
+            else:
+                order_count.append(i)
+        print(order_count)
+        while True:
+            try:
+                index = int(input("Enter index of the page you want to close : "))
+                if index in order_count:  # order_count is the number of dictionaries in the list
+                    break
+            except ValueError:
+                print("Invalid input. Please enter a valid tab index")
+
         print(closeTab(index))
 
 
