@@ -15,7 +15,7 @@ def main():
 
     print()
     # User input validation
-    num_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    num_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]  # Saving the choices number in a list
     while True:
         try:  # Try-except notation (just the idea) https://www.w3schools.com/python/python_try_except.asp
             user_input = int(input("Enter your choice please"))
@@ -23,6 +23,13 @@ def main():
                 break
         except ValueError:
             print("Invalid input. Please enter a valid choice (between 1-9) :")
+
+    if user_input == 1:
+        print(OpenTab())
+
+
+def OpenTab():
+    
 
 
 while True:
