@@ -35,17 +35,20 @@ def main():
     elif user_input == 2:
         variable = 1
         index = input("enter index to delete the page : ")
+        print(dictionary_list_Tab)
         if index == "":
             variable = 0
             print(closeTab(index, variable))
         else:
             try:
                 index = int(index)
-
-                for i in range(len(dictionary_list_Tab)):
-                    if i == index:
-                        print(closeTab(index, variable))
-                        break
+                if index > len(dictionary_list_Tab):
+                    print("This Tab is not found")
+                else:
+                    for i in range(len(dictionary_list_Tab)):
+                        if i == index:
+                            print(closeTab(index, variable))
+                            break
             except ValueError:
                 print("Invalid input. Please enter a valid tab index")
 
@@ -60,9 +63,12 @@ def closeTab(index, variable):
     if variable == 1:
         dictionary_list_Tab.pop(index)
     else:
-        dictionary_list_Tab.pop(-1)
+        if len(dictionary_list_Tab) != 0:
+            dictionary_list_Tab.pop(-1)
+        else:
+            print("No TABS to be deleted")
 
-    return dictionary_list_Tab
+    return dictionary_list_Tab, "those are the tabs remained"
 
 
 while True:
