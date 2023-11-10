@@ -31,13 +31,21 @@ def main():
     if user_input == 1:
         title = input("Enter Tab Title : ")
         url = input("Enter a url : ")
-        print(OpenTab(dictionary_list_Tab, title, url))
+        print(openTab(dictionary_list_Tab, title, url))
+
+    elif user_input == 2:
+        index = int(input("Enter index of the page you want to close : "))
+        print(closeTab(index))
 
 
-def OpenTab(dic_list, title, url):
+def openTab(dic_list, title, url):
     dic = {'title': title, 'url': url}
     dic_list.append(dic)
     return dic_list
+
+
+def closeTab(index):
+    return dictionary_list_Tab
 
 
 while True:
