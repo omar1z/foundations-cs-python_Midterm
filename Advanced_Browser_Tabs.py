@@ -1,5 +1,6 @@
 dictionary_list_Tab = []  # this list is to maintain each tab in a dictionary
 
+
 def main():
     print()
     # Greeting
@@ -30,11 +31,15 @@ def main():
     if user_input == 1:
         title = input("Enter Tab Title : ")
         url = input("Enter a url : ")
-        print(openTab(dictionary_list_Tab, title, url))
+        url_verification = "https://www..com"
+        if url[0:12] == url_verification[0:12] and url[-4:] == url_verification[-4:]:
+            print(openTab(dictionary_list_Tab, title, url))
+        else:
+            print("This is not a URL, try again")
 
     elif user_input == 2:
         variable = 1    # variable here is to determine if the input is empty or not
-        index = input("enter index to delete the page : ")
+        index = input("enter index to delete the page (starting from 0->) : ")
         print(dictionary_list_Tab)
         if index == "":
             variable = 0
@@ -42,7 +47,8 @@ def main():
             # first I took the input as a normal input from the user just to check if it's empty
         else:
             try:
-                index = int(index)  # int() transforms the type of the object to integer in opposite to str()(informations from university)
+                index = int(index)  # int() transforms the type of the object to integer in opposite to str()
+                # (information from university)
                 # the input is now of integer type to search the indexes
                 if index > len(dictionary_list_Tab):
                     print("This Tab is not found")
