@@ -31,11 +31,11 @@ def main():
     if user_input == 1:
         title = input("Enter Tab Title : ")
         url = input("Enter a url : ")
-        url_verification = "https://www..com"
-        url_verification1 = "http://www..com"
-        if url[0:12] == url_verification[0:12] and url[-4:] == url_verification[-4:]:
+        url_verification = "https://www."
+        url_verification1 = "http://www."
+        if url_verification in url:
             print(openTab(dictionary_list_Tab, title, url))
-        elif url[0:11] == url_verification1[0:11] and url[-4:] == url_verification1[-4:]:
+        elif url_verification1 in url:
             print(openTab(dictionary_list_Tab, title, url))
         else:
             print("This is not a URL, try again")
