@@ -41,8 +41,34 @@ def main():
             print("This is not a URL, try again")
 
     elif user_input == 2:
-        print(dictionary_list_Tab)
-        variable = 1    # variable here is to determine if the input is empty or not
+        choosingIndex(2)
+        # calling function of closeTab from inside choosing index
+    elif user_input == 3:
+        choosingIndex(3)
+
+
+def openTab(dic_list, title, url):
+    dic = {'title': title, 'url': url}
+    dic_list.append(dic)
+    return dic_list
+
+
+def closeTab(index, variable):
+    if variable == 1:
+        dictionary_list_Tab.pop(index)
+    else:
+        if len(dictionary_list_Tab) != 0:
+            dictionary_list_Tab.pop(-1)
+        else:
+            print("No TABS to be deleted")
+
+    return dictionary_list_Tab, "those are the tabs remaining"
+
+
+def choosingIndex(nbr):
+    print(dictionary_list_Tab)
+    variable = 1  # variable here is to determine if the input is empty or not
+    if nbr == 2:
         index = input("Enter Tab index to close the page !(starting from 0->)! : ")
         if index == "":
             variable = 0
@@ -63,24 +89,28 @@ def main():
             except ValueError:
                 print("Invalid input. Please enter a valid tab index")
             # this part might seem a little creepy, but I tried not to use Google or other sources of information
+    # else:
+        # index = input("Enter Tab index you want to get content !(starting from 0->)! : ")
+        # if index == "":
+        #     variable = 0
+        #     print(getContent(index, variable))
+        # else:
+        #     try:
+        #         index = int(index)
+        #         if index > len(dictionary_list_Tab):
+        #             print("This Tab is not found")
+        #         else:
+        #             for i in range(len(dictionary_list_Tab)):
+        #                 if i == index:
+        #                     print(closeTab(index, variable))
+        #                     break
+        #     except ValueError:
+        #         print("Invalid input. Please enter a valid tab index")
+        #     # this part might seem a little creepy, but I tried not to use Google or other sources of information
 
 
-def openTab(dic_list, title, url):
-    dic = {'title': title, 'url': url}
-    dic_list.append(dic)
-    return dic_list
+    # def getContent():
 
-
-def closeTab(index, variable):
-    if variable == 1:
-        dictionary_list_Tab.pop(index)
-    else:
-        if len(dictionary_list_Tab) != 0:
-            dictionary_list_Tab.pop(-1)
-        else:
-            print("No TABS to be deleted")
-
-    return dictionary_list_Tab, "those are the tabs remaining"
 
 
 while True:
