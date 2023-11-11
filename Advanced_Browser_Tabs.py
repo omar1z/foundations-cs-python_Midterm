@@ -1,3 +1,4 @@
+import requests as re
 dictionary_list_Tab = []  # this list is to maintain each tab in a dictionary
 
 
@@ -31,8 +32,8 @@ def main():
     if user_input == 1:
         title = input("Enter Tab Title : ")
         url = input("Enter a url : ")
-        url_verification = "https://www."
-        url_verification1 = "http://www."
+        url_verification = "https://"
+        url_verification1 = "http://"
         if url_verification in url:
             print(openTab(dictionary_list_Tab, title, url))
         elif url_verification1 in url:
@@ -47,13 +48,13 @@ def main():
         choosingIndex(3)
 
 
-def openTab(dic_list, title, url):
+def openTab(dic_list, title, url):  # function of part 1
     dic = {'title': title, 'url': url}
     dic_list.append(dic)
     return dic_list
 
 
-def closeTab(index, variable):
+def closeTab(index, variable):  # function of part 2
     if variable == 1:
         dictionary_list_Tab.pop(index)
     else:
@@ -63,6 +64,20 @@ def closeTab(index, variable):
             print("No TABS to be deleted")
 
     return dictionary_list_Tab, "those are the tabs remaining"
+
+
+def getContent(index, variable):  # function of part 3
+    if variable == 1:
+        response = re.get(dictionary_list_Tab[index]['url'])
+        html = response.text
+        return html
+    else:
+        if len(dictionary_list_Tab) != 0:
+            response = re.get(dictionary_list_Tab[-1]['url'])
+            html = response.text
+            return html
+        else:
+            return "No TABS to show content !"
 
 
 def choosingIndex(nbr):
@@ -89,27 +104,25 @@ def choosingIndex(nbr):
             except ValueError:
                 print("Invalid input. Please enter a valid tab index")
             # this part might seem a little creepy, but I tried not to use Google or other sources of information
-    # else:
-        # index = input("Enter Tab index you want to get content !(starting from 0->)! : ")
-        # if index == "":
-        #     variable = 0
-        #     print(getContent(index, variable))
-        # else:
-        #     try:
-        #         index = int(index)
-        #         if index > len(dictionary_list_Tab):
-        #             print("This Tab is not found")
-        #         else:
-        #             for i in range(len(dictionary_list_Tab)):
-        #                 if i == index:
-        #                     print(closeTab(index, variable))
-        #                     break
-        #     except ValueError:
-        #         print("Invalid input. Please enter a valid tab index")
-        #     # this part might seem a little creepy, but I tried not to use Google or other sources of information
+    else:
+        index = input("Enter Tab index you want to get content !(starting from 0->)! : ")
+        if index == "":
+            variable = 0
+            print(getContent(index, variable))
+        else:
+            try:
+                index = int(index)
+                if index > len(dictionary_list_Tab):
+                    print("This Tab is not found")
+                else:
+                    for i in range(len(dictionary_list_Tab)):
+                        if i == index:
+                            print(getContent(index, variable))
+                            break
+            except ValueError:
+                print("Invalid input. Please enter a valid tab index")
+            # this part might seem a little creepy, but I tried not to use Google or other sources of information
 
-
-    # def getContent():
 
 
 
