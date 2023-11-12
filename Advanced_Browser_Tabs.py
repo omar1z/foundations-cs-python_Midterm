@@ -32,16 +32,7 @@ def main():
             print("Invalid input. Please enter a valid choice (between 1-9) : ")
 
     if user_input == 1:
-        title = input("Enter Tab Title : ")
-        url = input("Enter a url ( make sure to start with https:// or http:// ) : ")
-        url_verification = "https://"
-        url_verification1 = "http://"
-        if url_verification in url:
-            print(openTab(dictionary_list_Tab, title, url))
-        elif url_verification1 in url:
-            print(openTab(dictionary_list_Tab, title, url))
-        else:
-            print("This is not a URL, try again")
+        tabInfo(user_input)
 
     elif user_input == 2:
         choosingIndex(2)
@@ -53,6 +44,30 @@ def main():
 
     elif user_input == 4:
         printTitles()
+
+    elif user_input == 5:
+        choosingIndex(5)
+
+
+def tabInfo(user_input):  # getting title and url (using it in part 1 and 5)
+    title = input("Enter Tab Title : ")
+    url = input("Enter a url ( make sure to start with https:// or http:// ) : ")
+    url_verification = "https://"
+    url_verification1 = "http://"
+    if user_input == 1:
+        if url_verification in url:
+            print(openTab(dictionary_list_Tab, title, url))
+        elif url_verification1 in url:
+            print(openTab(dictionary_list_Tab, title, url))
+        else:
+            print("This is not a URL, try again")
+    else:
+        if url_verification in url:
+            print(createNesTab(dictionary_list_Tab, title, url))
+        elif url_verification1 in url:
+            print(createNesTab(dictionary_list_Tab, title, url))
+        else:
+            print("This is not a URL, try again")
 
 
 def openTab(dic_list, title, url):  # function of part 1
@@ -87,6 +102,16 @@ def getContent(index, variable):  # function of part 3
             return "No TABS to show content !"
 
 
+def printTitles():
+    for i in range(len(dictionary_list_Tab)):
+        print(dictionary_list_Tab[i]['title'])
+
+
+def createNesTab(index, variable):
+    if variable == 1:
+        tabInfo()
+
+
 def choosingIndex(nbr):
     print(dictionary_list_Tab)
     variable = 1  # variable here is to determine if the input is empty or not
@@ -111,7 +136,7 @@ def choosingIndex(nbr):
             except ValueError:
                 print("Invalid input. Please enter a valid tab index")
 
-    else:
+    elif nbr == 3:
         index = input("Enter Tab index you want to get content !(starting from 0->)! : ")
         if index == "":
             variable = 0
@@ -129,10 +154,23 @@ def choosingIndex(nbr):
             except ValueError:
                 print("Invalid input. Please enter a valid tab index")
 
-
-def printTitles():
-    for i in range(len(dictionary_list_Tab)):
-        print(dictionary_list_Tab[i]['title'])
+    else :
+        index = input("Enter Tab index you want to add nested tab !(starting from 0->)! : ")
+        if index == "":
+            variable = 0
+            print(createNesTab(index, variable))
+        else:
+            try:
+                index = int(index)
+                if index > len(dictionary_list_Tab):
+                    print("This Tab is not found")
+                else:
+                    for i in range(len(dictionary_list_Tab)):
+                        if i == index:
+                            print(createNesTab(index, variable))
+                            break
+            except ValueError:
+                print("Invalid input. Please enter a valid tab index")
 
 
 while True:
