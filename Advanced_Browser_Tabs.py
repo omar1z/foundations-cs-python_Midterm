@@ -144,10 +144,19 @@ def clearAllTabs():
 
 
 def saveTabs():
-    json_dic = str(dictionary_list_Tab)
     with open('ABT.json', 'w') as json_file:
-        json_file.write(json_dic)
-        print("saved !")
+        data = []
+        for i in range(len(dictionary_list_Tab)):
+            title_parent = "title : " + dictionary_list_Tab[i]['title'] + "\n" + getContent(i, 1)
+            data.append(title_parent)
+            if len(dictionary_list_Tab[i]) > 2:
+                for j in range(len(dictionary_list_Tab[i]['nested'])):
+                    if j == 0:
+                        data.append(dictionary_list_Tab[i]['nested'][j]['title'])
+                    else:
+                        data.append(dictionary_list_Tab[i]['nested'][j]['title'])
+        new_data = json.dumps(data)
+        json_file.write(str(new_data))
 
 
 def choosingIndex(nbr):  # used in part 2 , part 3 , part 5
