@@ -55,6 +55,9 @@ def main():
     elif user_input == 7:
         saveTabs()
 
+    elif user_input == 8:
+        loadTabFile()
+
 
 def tabInfo(dic_list, user_input):  # getting title and url (using it in part 1 and 5)
     title = input("Enter Tab Title : ")
@@ -160,6 +163,10 @@ def saveTabs():
                     data.append(dictionary_list_Tab[i]['nested'][j]['title'])
         new_data = json.dumps(data)  # I have added the parent and the child titles and content to data
         json_file.write(str(new_data))  # we can only write a string
+
+
+def loadTabFile():
+    input_file = input("Enter a file path to load data :")
 
 
 def choosingIndex(nbr):  # used in part 2 , part 3 , part 5
