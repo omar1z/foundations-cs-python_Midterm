@@ -77,8 +77,8 @@ def openTab(dic_list, title, url):  # function of part 1
 
 
 def openTabN(dic_list, title, url):
-    nested = {'title': title, 'url': url}
-    dic_list['nested'] = nested
+    dic = {'title': title, 'url': url}
+    dic_list['nested'].append(dic)
     return dic_list
 
 
@@ -114,6 +114,8 @@ def printTitles():
 
 
 def createNesTab(index, variable):
+    if len(dictionary_list_Tab[index]) <= 2:
+        dictionary_list_Tab[index]['nested'] = []
     if variable == 1:
         tabInfo(dictionary_list_Tab[index], 5)
     else:
