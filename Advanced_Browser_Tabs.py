@@ -144,7 +144,14 @@ def clearAllTabs():
 
 
 def saveTabs():
-    with open('ABT.json', 'w') as json_file:
+    while True:
+        try:
+            file_path = input("Enter a json file where you want to copy your tabs state : ")
+            if file_path[-5:] == ".json":
+                break
+        except ValueError:
+            print("Invalid input. Please enter a valid .json file : ")
+    with open(file_path, 'w') as json_file:
         data = []
         for i in range(len(dictionary_list_Tab)):
             title_parent = "title : " + dictionary_list_Tab[i]['title'] + "\n" + getContent(i, 1)
