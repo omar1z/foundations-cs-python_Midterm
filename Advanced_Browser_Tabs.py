@@ -1,7 +1,6 @@
 import requests as re  # to access html content from browser
 import json
 
-
 dictionary_list_Tab = []  # this list is to maintain each tab in a dictionary
 
 
@@ -23,7 +22,6 @@ def main():
 
     print()
     # User input validation
-    # num_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]  # Saving the choices number in a list
     while True:
         try:  # Try-except notation (just the idea) https://www.w3schools.com/python/python_try_except.asp
             user_input = int(input("Enter your choice please : "))
@@ -38,20 +36,21 @@ def main():
 
     elif user_input == 2:
         choosingIndex(2)
-        # calling function of closeTab from inside choosing index
+        # calling function of closeTab from inside choosingIndex
 
     elif user_input == 3:
         choosingIndex(3)
-        # calling function of closeTab from inside choosing index
+        # calling function of getContent from inside choosingIndex
 
     elif user_input == 4:
         printTitles()
 
     elif user_input == 5:
         choosingIndex(5)
+        # calling the function createNesTab from inside choosingIndex
 
     elif user_input == 6:
-        clearAllTabs()
+        clearAllTabs()  # I just cleared all tabs in a .clear() function
 
     elif user_input == 7:
         saveTabs()
@@ -69,7 +68,7 @@ def tabInfo(dic_list, user_input):  # getting title and url (using it in part 1 
             print(openTab(dic_list, title, url))
         else:
             print("This is not a URL, try again")
-    else:  # for part 5 nested tab
+    else:  # for part 5 nested tab if the page is nested from another page we call openTabN instead of openTab
         if url_verification in url:
             print(openTabN(dic_list, title, url))
         elif url_verification1 in url:
@@ -84,7 +83,7 @@ def openTab(dic_list, title, url):  # function of part 1
     return dic_list
 
 
-def openTabN(dic_list, title, url):  # function of part 2
+def openTabN(dic_list, title, url):  # for nested tabs
     dic = {'title': title, 'url': url}
     dic_list['nested'].append(dic)
     return dic_list
@@ -95,7 +94,7 @@ def closeTab(index, variable):  # function of part 2
         dictionary_list_Tab.pop(index)
     else:
         if len(dictionary_list_Tab) != 0:
-            dictionary_list_Tab.pop(-1)
+            dictionary_list_Tab.pop(-1)  # we pop the last tab as we consume that the last tab is opened or displayed
         else:
             print("No TABS to be deleted")
 
@@ -124,7 +123,7 @@ def printTitles():  # function of part 4
 
 
 def createNesTab(index, variable):
-    if variable == 1:
+    if variable == 1:  # normal tab has 2 arguments title&url so to add nested tabs I create list inside the dictionary
         if len(dictionary_list_Tab[index]) <= 2:  # to check if the nested list inside main tab exists
             dictionary_list_Tab[index]['nested'] = []  # creating nested tabs as a list inside the dictionary of tab
         tabInfo(dictionary_list_Tab[index], 5)
@@ -147,23 +146,20 @@ def saveTabs():
     while True:
         try:
             file_path = input("Enter a json file where you want to copy your tabs state : ")
-            if file_path[-5:] == ".json":
+            if file_path[-5:] == ".json":  # just to verify that he entered a .json file
                 break
         except ValueError:
             print("Invalid input. Please enter a valid .json file : ")
     with open(file_path, 'w') as json_file:
         data = []
         for i in range(len(dictionary_list_Tab)):
-            title_parent = "title : " + dictionary_list_Tab[i]['title'] + "\n" + getContent(i, 1)
-            data.append(title_parent)
+            data_parent = "title : " + dictionary_list_Tab[i]['title'] + "\n" + getContent(i, 1)
+            data.append(data_parent)
             if len(dictionary_list_Tab[i]) > 2:
                 for j in range(len(dictionary_list_Tab[i]['nested'])):
-                    if j == 0:
-                        data.append(dictionary_list_Tab[i]['nested'][j]['title'])
-                    else:
-                        data.append(dictionary_list_Tab[i]['nested'][j]['title'])
-        new_data = json.dumps(data)
-        json_file.write(str(new_data))
+                    data.append(dictionary_list_Tab[i]['nested'][j]['title'])
+        new_data = json.dumps(data)  # I have added the parent and the child titles and content to data
+        json_file.write(str(new_data))  # we can only write a string
 
 
 def choosingIndex(nbr):  # used in part 2 , part 3 , part 5
