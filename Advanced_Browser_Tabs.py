@@ -74,6 +74,7 @@ def tabInfo(dic_list, user_input):  # getting title and url (using it in part 1 
             print(openTab(dic_list, title, url))
         else:
             print("This is not a URL, try again")
+            return
     else:  # for part 5 nested tab if the page is nested from another page we call openTabN instead of openTab
         if url_verification in url:
             print(openTabN(dic_list, title, url))
@@ -107,7 +108,7 @@ def closeTab(index, variable):  # function of part 2
     return dictionary_list_Tab, "those are the tabs remaining"
 
 
-def getContent(index, variable):  # function of part 3
+def getContent(index, variable):  # function of part 31
     if variable == 1:
         response = re.get(dictionary_list_Tab[index]['url'])
         html = response.text
@@ -125,9 +126,9 @@ def printTitles():  # function of part 4
     if len(dictionary_list_Tab) > 0:
         for i in range(len(dictionary_list_Tab)):
             print(dictionary_list_Tab[i]['title'])  # main tab
-            # if len(dictionary_list_Tab[i]) > 2:
-            #     for j in range(len(dictionary_list_Tab[i]['nested'])):  # for nested tabs inside main tab
-            #         print("\t", dictionary_list_Tab[i]['nested'][j]['title'])  # nested tabs
+            if len(dictionary_list_Tab[i]) > 2:
+                for j in range(len(dictionary_list_Tab[i]['nested'])):  # for nested tabs inside main tab
+                    print("\t", dictionary_list_Tab[i]['nested'][j]['title'])  # nested tabs
 
 
 def createNesTab(index, variable):
@@ -177,10 +178,11 @@ def saveTabs():
 
 
 def loadTabFile():
-    input_file = input("Enter a file where you want to retrieve data : ")
+    # there is a file load.json that have 5 tabs
+    input_file = fileName()
     json_file = open(input_file, 'r')
     data = json_file.read()
-    obj = json.loads(data)
+    obj = json.loads(data)  # these methods are from json website
     tabs = obj['tabs']
     for i in range(len(tabs)):
         dic = {'title': tabs[i].get("title"), 'url': tabs[i].get("url")}
