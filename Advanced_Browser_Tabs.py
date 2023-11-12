@@ -1,4 +1,5 @@
-import requests as re
+import requests as re  # to access html content from browser
+
 dictionary_list_Tab = []  # this list is to maintain each tab in a dictionary
 
 
@@ -20,18 +21,19 @@ def main():
 
     print()
     # User input validation
-    num_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]  # Saving the choices number in a list
+    # num_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]  # Saving the choices number in a list
     while True:
         try:  # Try-except notation (just the idea) https://www.w3schools.com/python/python_try_except.asp
             user_input = int(input("Enter your choice please : "))
-            if user_input in num_list:
+            # if user_input in num_list:
+            if 0 < user_input < 10:
                 break
         except ValueError:
             print("Invalid input. Please enter a valid choice (between 1-9) : ")
 
     if user_input == 1:
         title = input("Enter Tab Title : ")
-        url = input("Enter a url : ")
+        url = input("Enter a url ( make sure to start with https:// or http:// ) : ")
         url_verification = "https://"
         url_verification1 = "http://"
         if url_verification in url:
@@ -44,8 +46,13 @@ def main():
     elif user_input == 2:
         choosingIndex(2)
         # calling function of closeTab from inside choosing index
+
     elif user_input == 3:
         choosingIndex(3)
+        # calling function of closeTab from inside choosing index
+
+    elif user_input == 4:
+        printTitles()
 
 
 def openTab(dic_list, title, url):  # function of part 1
@@ -103,7 +110,7 @@ def choosingIndex(nbr):
                             break
             except ValueError:
                 print("Invalid input. Please enter a valid tab index")
-            # this part might seem a little creepy, but I tried not to use Google or other sources of information
+
     else:
         index = input("Enter Tab index you want to get content !(starting from 0->)! : ")
         if index == "":
@@ -121,9 +128,11 @@ def choosingIndex(nbr):
                             break
             except ValueError:
                 print("Invalid input. Please enter a valid tab index")
-            # this part might seem a little creepy, but I tried not to use Google or other sources of information
 
 
+def printTitles():
+    for i in range(len(dictionary_list_Tab)):
+        print(dictionary_list_Tab[i]['title'])
 
 
 while True:
