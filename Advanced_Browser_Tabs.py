@@ -48,20 +48,23 @@ def main():
     elif user_input == 5:
         choosingIndex(5)
 
+    elif user_input == 6:
+        clearAllTabs()
+
 
 def tabInfo(dic_list, user_input):  # getting title and url (using it in part 1 and 5)
     title = input("Enter Tab Title : ")
     url = input("Enter a url ( make sure to start with https:// or http:// ) : ")
     url_verification = "https://"
     url_verification1 = "http://"
-    if user_input == 1:
+    if user_input == 1:  # for part 1 new tab
         if url_verification in url:
             print(openTab(dic_list, title, url))
         elif url_verification1 in url:
             print(openTab(dic_list, title, url))
         else:
             print("This is not a URL, try again")
-    else:
+    else:  # for part 5 nested tab
         if url_verification in url:
             print(openTabN(dic_list, title, url))
         elif url_verification1 in url:
@@ -76,7 +79,7 @@ def openTab(dic_list, title, url):  # function of part 1
     return dic_list
 
 
-def openTabN(dic_list, title, url):
+def openTabN(dic_list, title, url):  # function of part 2
     dic = {'title': title, 'url': url}
     dic_list['nested'].append(dic)
     return dic_list
@@ -108,28 +111,34 @@ def getContent(index, variable):  # function of part 3
             return "No TABS to show content !"
 
 
-def printTitles():
+def printTitles():  # function of part 4
     for i in range(len(dictionary_list_Tab)):
-        print(dictionary_list_Tab[i]['title'])
-        for j in range(len(dictionary_list_Tab[i]['nested'])):
-            print("\t", dictionary_list_Tab[i]['nested'][j]['title'])
+        print(dictionary_list_Tab[i]['title'])  # main tab
+        for j in range(len(dictionary_list_Tab[i]['nested'])):  # for nested tabs inside main tab
+            print("\t", dictionary_list_Tab[i]['nested'][j]['title'])  # nested tabs
 
 
 def createNesTab(index, variable):
     if variable == 1:
-        if len(dictionary_list_Tab[index]) <= 2:
-            dictionary_list_Tab[index]['nested'] = []
+        if len(dictionary_list_Tab[index]) <= 2:  # to check if the nested list inside main tab exists
+            dictionary_list_Tab[index]['nested'] = []  # creating nested tabs as a list inside the dictionary of tab
         tabInfo(dictionary_list_Tab[index], 5)
     else:
         if len(dictionary_list_Tab) != 0:
-            if len(dictionary_list_Tab[-1]) <= 2:
+            if len(dictionary_list_Tab[-1]) <= 2:  # same but with index -1 because we need an index
                 dictionary_list_Tab[-1]['nested'] = []
             tabInfo(dictionary_list_Tab[-1], 5)
         else:
             return "No TABS to open nested one inside !"
 
 
-def choosingIndex(nbr):
+def clearAllTabs():
+    dictionary_list_Tab.clear()
+    print("All tabs cleared")
+    return dictionary_list_Tab
+
+
+def choosingIndex(nbr):  # used in part 2 , part 3 , part 5
     print(dictionary_list_Tab)
     variable = 1  # variable here is to determine if the input is empty or not
     if nbr == 2:
