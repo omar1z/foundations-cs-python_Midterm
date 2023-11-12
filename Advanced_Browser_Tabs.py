@@ -1,6 +1,5 @@
 import requests as re  # to access html content from browser
 import json
-import pandas as pd
 
 dictionary_list_Tab = []  # this list is to maintain each tab in a dictionary
 
@@ -58,6 +57,9 @@ def main():
 
     elif user_input == 8:
         loadTabFile()
+
+    else:
+        exit()
 
 
 def tabInfo(dic_list, user_input):  # getting title and url (using it in part 1 and 5)
