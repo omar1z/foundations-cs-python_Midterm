@@ -1,4 +1,6 @@
 import requests as re  # to access html content from browser
+import json
+
 
 dictionary_list_Tab = []  # this list is to maintain each tab in a dictionary
 
@@ -50,6 +52,9 @@ def main():
 
     elif user_input == 6:
         clearAllTabs()
+
+    elif user_input == 7:
+        saveTabs()
 
 
 def tabInfo(dic_list, user_input):  # getting title and url (using it in part 1 and 5)
@@ -136,6 +141,13 @@ def clearAllTabs():
     dictionary_list_Tab.clear()
     print("All tabs cleared")
     return dictionary_list_Tab
+
+
+def saveTabs():
+    json_dic = str(dictionary_list_Tab)
+    with open('ABT.json', 'w') as json_file:
+        json_file.write(json_dic)
+        print("saved !")
 
 
 def choosingIndex(nbr):  # used in part 2 , part 3 , part 5
