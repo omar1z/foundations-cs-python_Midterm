@@ -32,7 +32,7 @@ def main():
             print("Invalid input. Please enter a valid choice (between 1-9) : ")
 
     if user_input == 1:
-        tabInfo(user_input)
+        tabInfo(dictionary_list_Tab, user_input)
 
     elif user_input == 2:
         choosingIndex(2)
@@ -49,23 +49,23 @@ def main():
         choosingIndex(5)
 
 
-def tabInfo(user_input):  # getting title and url (using it in part 1 and 5)
+def tabInfo(dic_list, user_input):  # getting title and url (using it in part 1 and 5)
     title = input("Enter Tab Title : ")
     url = input("Enter a url ( make sure to start with https:// or http:// ) : ")
     url_verification = "https://"
     url_verification1 = "http://"
     if user_input == 1:
         if url_verification in url:
-            print(openTab(dictionary_list_Tab, title, url))
+            print(openTab(dic_list, title, url))
         elif url_verification1 in url:
-            print(openTab(dictionary_list_Tab, title, url))
+            print(openTab(dic_list, title, url))
         else:
             print("This is not a URL, try again")
     else:
         if url_verification in url:
-            print(createNesTab(dictionary_list_Tab, title, url))
+            print(openTabN(dic_list, title, url))
         elif url_verification1 in url:
-            print(createNesTab(dictionary_list_Tab, title, url))
+            print(openTabN(dic_list, title, url))
         else:
             print("This is not a URL, try again")
 
@@ -73,6 +73,12 @@ def tabInfo(user_input):  # getting title and url (using it in part 1 and 5)
 def openTab(dic_list, title, url):  # function of part 1
     dic = {'title': title, 'url': url}
     dic_list.append(dic)
+    return dic_list
+
+
+def openTabN(dic_list, title, url):
+    nested = {'title': title, 'url': url}
+    dic_list['nested'] = nested
     return dic_list
 
 
@@ -109,7 +115,12 @@ def printTitles():
 
 def createNesTab(index, variable):
     if variable == 1:
-        tabInfo()
+        tabInfo(dictionary_list_Tab[index], 5)
+    else:
+        if len(dictionary_list_Tab) != 0:
+            tabInfo(dictionary_list_Tab[-1], 5)
+        else:
+            return "No TABS to open nested one inside !"
 
 
 def choosingIndex(nbr):
@@ -154,7 +165,7 @@ def choosingIndex(nbr):
             except ValueError:
                 print("Invalid input. Please enter a valid tab index")
 
-    else :
+    else:
         index = input("Enter Tab index you want to add nested tab !(starting from 0->)! : ")
         if index == "":
             variable = 0
