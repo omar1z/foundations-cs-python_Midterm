@@ -1,5 +1,6 @@
 import requests as re  # to access html content from browser
 import json
+import pandas as pd
 
 dictionary_list_Tab = []  # this list is to maintain each tab in a dictionary
 
@@ -167,6 +168,8 @@ def saveTabs():
 
 def loadTabFile():
     input_file = input("Enter a file path to load data :")
+    file_data = pd.read_csv(input_file)
+    print(file_data)
 
 
 def choosingIndex(nbr):  # used in part 2 , part 3 , part 5
