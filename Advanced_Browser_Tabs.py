@@ -111,15 +111,19 @@ def getContent(index, variable):  # function of part 3
 def printTitles():
     for i in range(len(dictionary_list_Tab)):
         print(dictionary_list_Tab[i]['title'])
+        for j in range(len(dictionary_list_Tab[i]['nested'])):
+            print("\t", dictionary_list_Tab[i]['nested'][j]['title'])
 
 
 def createNesTab(index, variable):
-    if len(dictionary_list_Tab[index]) <= 2:
-        dictionary_list_Tab[index]['nested'] = []
     if variable == 1:
+        if len(dictionary_list_Tab[index]) <= 2:
+            dictionary_list_Tab[index]['nested'] = []
         tabInfo(dictionary_list_Tab[index], 5)
     else:
         if len(dictionary_list_Tab) != 0:
+            if len(dictionary_list_Tab[-1]) <= 2:
+                dictionary_list_Tab[-1]['nested'] = []
             tabInfo(dictionary_list_Tab[-1], 5)
         else:
             return "No TABS to open nested one inside !"
