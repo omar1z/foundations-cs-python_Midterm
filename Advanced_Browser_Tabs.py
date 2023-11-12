@@ -122,8 +122,9 @@ def getContent(index, variable):  # function of part 3
 def printTitles():  # function of part 4
     for i in range(len(dictionary_list_Tab)):
         print(dictionary_list_Tab[i]['title'])  # main tab
-        for j in range(len(dictionary_list_Tab[i]['nested'])):  # for nested tabs inside main tab
-            print("\t", dictionary_list_Tab[i]['nested'][j]['title'])  # nested tabs
+        if len(dictionary_list_Tab[i]) > 2:
+            for j in range(len(dictionary_list_Tab[i]['nested'])):  # for nested tabs inside main tab
+                print("\t", dictionary_list_Tab[i]['nested'][j]['title'])  # nested tabs
 
 
 def createNesTab(index, variable):
@@ -173,7 +174,9 @@ def saveTabs():
 
 
 def loadTabFile():
-    input_file = fileName()
+    input_file = input("Enter a file where you want to retrieve data : ")
+    # file = open(input_file, "r")
+    # dictionary_list_Tab.append(file)
 
 
 def choosingIndex(nbr):  # used in part 2 , part 3 , part 5
