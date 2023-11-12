@@ -146,7 +146,8 @@ def clearAllTabs():
     return dictionary_list_Tab
 
 
-def saveTabs():
+def fileName():  # this function is to get the file path as .json only (like what charbel said: preferable to save and
+    # load into a .json file)
     while True:
         try:
             file_path = input("Enter a json file where you want to copy your tabs state : ")
@@ -154,6 +155,11 @@ def saveTabs():
                 break
         except ValueError:
             print("Invalid input. Please enter a valid .json file : ")
+    return file_path
+
+
+def saveTabs():
+    file_path = fileName()
     with open(file_path, 'w') as json_file:
         data = []
         for i in range(len(dictionary_list_Tab)):
@@ -167,9 +173,7 @@ def saveTabs():
 
 
 def loadTabFile():
-    input_file = input("Enter a file path to load data :")
-    file_data = pd.read_csv(input_file)
-    print(file_data)
+    input_file = fileName()
 
 
 def choosingIndex(nbr):  # used in part 2 , part 3 , part 5
